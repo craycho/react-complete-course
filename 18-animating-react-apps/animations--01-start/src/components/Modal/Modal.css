@@ -1,0 +1,75 @@
+.Modal {
+  position: fixed;
+  z-index: 200;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 2px #ccc;
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+  box-sizing: border-box;
+  top: 30%;
+  left: 25%;
+  width: 50%;
+  transition: all 1s ease-out; /* 1s = Najduza kolicina vremena koju animation moze trajati, overrideano ako je krace */
+  /* Transition cini da se neke properties ne apply instant, vec over time. 
+  all = sve na koje se applya, nakon 3s, tip animacije. (Properties poput transform, dok display ne moze) */
+}
+
+/* BEZ CSSTransition/sa classNames objektom:
+.ModalOpen {
+  animation: openModal 0.4s ease-out forwards;
+  visibility: visible;
+}
+
+.ModalClosed {
+  animation: closeModal 1s ease-out forwards;
+  visibility: hidden;
+} */
+
+/* Traju 1ms prije nego pocne -active animacija:
+.fade-slide-enter {
+}
+.fade-slide-exit {
+} */
+
+.fade-slide-enter-active {
+  animation: openModal 0.4s ease-out forwards; /* forwards = ne loopa, sadrzi zadnji step (100%) */
+  visibility: visible; /* Da bi dugme bilo clickable */
+}
+
+.fade-slide-exit-active {
+  animation: closeModal 0.8s ease-out forwards;
+  visibility: hidden;
+}
+
+@keyframes openModal {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(
+      0
+    ); /* 0 = Koristi poziciju koju treba imati po htmlu */
+  }
+}
+
+@keyframes closeModal {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(10%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
